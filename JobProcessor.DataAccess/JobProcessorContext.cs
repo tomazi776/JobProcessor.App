@@ -6,7 +6,7 @@ namespace JobProcessor.DataAccess
 {
     public class JobProcessorContext : DbContext, IDbContext
     {
-        DbSet<Job> Jobs { get; set; }
+        public DbSet<Job> Jobs { get; set; }
         public JobProcessorContext() : base("name=JobProcessorAppDbCnn")
         {
 

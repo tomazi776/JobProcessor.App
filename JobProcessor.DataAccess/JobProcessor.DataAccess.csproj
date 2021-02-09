@@ -51,10 +51,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entities\Job.cs" />
     <Compile Include="JobProcessorContext.cs" />
     <Compile Include="Migrations\202102081439244_Initial.cs" />
     <Compile Include="Migrations\202102081439244_Initial.designer.cs">
       <DependentUpon>202102081439244_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202102091032215_AddJobEntityModel.cs" />
+    <Compile Include="Migrations\202102091032215_AddJobEntityModel.designer.cs">
+      <DependentUpon>202102091032215_AddJobEntityModel.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -69,6 +74,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202102081439244_Initial.resx">
       <DependentUpon>202102081439244_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202102091032215_AddJobEntityModel.resx">
+      <DependentUpon>202102091032215_AddJobEntityModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
