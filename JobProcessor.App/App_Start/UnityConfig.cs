@@ -3,9 +3,6 @@ using JobProcessor.DataAccess.Services;
 using JobProcessor.Domain;
 using JobProcessor.Domain.Services;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using Unity;
 
 namespace JobProcessor.App.App_Start
