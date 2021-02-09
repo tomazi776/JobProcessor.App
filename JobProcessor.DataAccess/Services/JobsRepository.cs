@@ -16,10 +16,10 @@ namespace JobProcessor.DataAccess.Services
             this.ctx = ctx;
         }
 
-        public void Create(Job job)
+        public int Create(Job job)
         {
             ctx.Jobs.Add(job);
-            ctx.SaveChanges();
+            return ctx.SaveChanges();
         }
     }
 }

@@ -212,6 +212,10 @@
       <Project>{d4e1284a-d866-4d28-82f1-73accbef6d62}</Project>
       <Name>JobProcessor.DataAccess</Name>
     </ProjectReference>
+    <ProjectReference Include="..\JobProcessor.Domain\JobProcessor.Domain.csproj">
+      <Project>{660da689-62f3-4551-9b99-b2278f88643b}</Project>
+      <Name>JobProcessor.Domain</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

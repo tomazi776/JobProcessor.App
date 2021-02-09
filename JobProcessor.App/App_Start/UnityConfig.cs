@@ -1,5 +1,7 @@
 ﻿using JobProcessor.DataAccess;
 using JobProcessor.DataAccess.Services;
+using JobProcessor.Domain;
+using JobProcessor.Domain.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,6 +26,7 @@ namespace JobProcessor.App.App_Start
         {
             container.RegisterType<IDbContext, JobProcessorContext>();
             container.RegisterType<IJobsRepository, JobsRepository>();
+            container.RegisterType<IJobService, JobService>();
         }
     }
 }

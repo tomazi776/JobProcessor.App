@@ -9,6 +9,6 @@ namespace JobProcessor.DataAccess.Services
 {
     public interface IJobsRepository
     {
-        void Create(Job job);
+        int Create(Job job);
     }
 }
