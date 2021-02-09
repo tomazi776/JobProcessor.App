@@ -1,4 +1,5 @@
-﻿using JobProcessor.Domain.Services;
+﻿using JobProcessor.App.ViewModels;
+using JobProcessor.Domain.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,18 @@ namespace JobProcessor.App.Controllers
 {
     public class JobsController : Controller
     {
-        // GET: Jobs
+        protected readonly IJobService jobService;
+        public JobsController(IJobService jobService)
+        {
+            this.jobService = jobService;
+        }
+
+        public ActionResult Create(JobCreationViewModel job)
+        {
+            return View(job);
+        }
+
+        [HttpPost]
         public ActionResult Create(string name, DateTime? doAfter)
         {
             return View();
