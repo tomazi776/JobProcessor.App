@@ -2,7 +2,7 @@
 
 namespace JobProcessor.DataAccess.Services
 {
-    interface IDbContext : IDisposable
+    public interface IDbContext : IDisposable
     {
     }
 }

@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using JobProcessor.DataAccess;
+using JobProcessor.DataAccess.Services;
+using System;
 using Unity;
 
 namespace JobProcessor.App.App_Start
@@ -20,7 +19,7 @@ namespace JobProcessor.App.App_Start
 
         private static void RegisterServices(IUnityContainer container)
         {
-
+            container.RegisterType<IDbContext, JobProcessorContext>();
         }
     }
 }
