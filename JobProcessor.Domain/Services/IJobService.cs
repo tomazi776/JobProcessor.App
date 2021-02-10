@@ -8,5 +8,7 @@ namespace JobProcessor.Domain.Services
     {
         Job Create(string name, DateTime? doAfter = null);
         List<Job> Get();
+        List<Job> GetFiltered(int startIndex = 0, int pageSize = 0);
+
     }
 }

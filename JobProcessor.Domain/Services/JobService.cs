@@ -40,5 +40,12 @@ namespace JobProcessor.Domain.Services
             var dalJobs = jobsRepository.Get();
             return mappingService.MapManyDALToDomainModel(dalJobs).ToList();
         }
+
+        public List<Job> GetFiltered(int startIndex = 0, int pageSize = 0)
+        {
+            var filtered = jobsRepository.FactorToPaginate(startIndex, pageSize);
+            var mappedFiltered = mappingService.MapManyDALToDomainModel(filtered);
+            return mappedFiltered.ToList();
+        }
     }
 }

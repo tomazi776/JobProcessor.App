@@ -18,6 +18,11 @@ namespace JobProcessor.App
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
+
+            routes.MapRoute(
+                name: "Search",
+                url: "{controller}/{startIndex}",
+                defaults: new { controller = "Jobs", action = "Index", startIndex = 0, pageSize = 10  });
         }
     }
 }

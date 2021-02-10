@@ -9,6 +9,7 @@ namespace JobProcessor.App.ViewModels
     public class JobsVM
     {
         public string Action { get; set; }
+        public int Pagination { get; set; }
         public Job Job { get; set; }
         public List<Job> Jobs { get; set; }
     }

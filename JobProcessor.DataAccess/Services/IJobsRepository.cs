@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace JobProcessor.DataAccess.Services
 {
-    public interface IJobsRepository
+    public interface IJobsRepository : IFiltrable<Job>
     {
         int Create(Job job);
         IEnumerable<Job> Get();
