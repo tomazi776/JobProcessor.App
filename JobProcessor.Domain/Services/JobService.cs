@@ -2,6 +2,8 @@
 using JobProcessor.Domain.Models;
 using JobProcessor.Domain.Services;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace JobProcessor.Domain.Services
 {
@@ -31,6 +33,12 @@ namespace JobProcessor.Domain.Services
             var mappedJob = mappingService.MapDomainToDALModel(newJob);
             jobsRepository.Create(mappedJob);
             return newJob;
+        }
+
+        public List<Job> Get()
+        {
+            var dalJobs = jobsRepository.Get();
+            return mappingService.MapManyDALToDomainModel(dalJobs).ToList();
         }
     }
 }

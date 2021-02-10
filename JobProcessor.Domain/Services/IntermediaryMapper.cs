@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace JobProcessor.Domain.Services
 {
@@ -30,6 +31,17 @@ namespace JobProcessor.Domain.Services
                 CreatedAt = job.CreatedAt,
                 UpdatedAt = job.UpdatedAt
             };
+        }
+
+        public IEnumerable<Models.Job> MapManyDALToDomainModel(IEnumerable<DataAccess.Entities.Job> jobs)
+        {
+            var mappedJobs = new List<Models.Job>();
+
+            foreach (var job in jobs)
+            {
+                mappedJobs.Add(MapDALToDomainModel(job));
+            }
+            return mappedJobs;
         }
     }
 }
