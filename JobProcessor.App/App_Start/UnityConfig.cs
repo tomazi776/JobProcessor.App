@@ -1,6 +1,5 @@
-﻿using JobProcessor.DataAccess;
+﻿using JobProcessor.DataAccess.ContextConfig;
 using JobProcessor.DataAccess.Services;
-using JobProcessor.Domain;
 using JobProcessor.Domain.Services;
 using System;
 using Unity;
@@ -23,7 +22,9 @@ namespace JobProcessor.App.App_Start
         {
             container.RegisterType<IDbContext, JobProcessorContext>();
             container.RegisterType<IJobsRepository, JobsRepository>();
-            container.RegisterType<IJobService, JobService>();
+            container.RegisterType<IIntermediaryMappingService, IntermediaryMapper>();
+            container.RegisterType<IJobService, JobService>(); 
+            
         }
     }
 }

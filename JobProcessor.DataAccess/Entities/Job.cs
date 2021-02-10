@@ -9,11 +9,12 @@ namespace JobProcessor.DataAccess.Entities
         public Guid Id { get; set; }
         [StringLength(50)]
         [Index(IsUnique = true)]
+        [Required(AllowEmptyStrings = false)]
         public string Name { get; set; }
         public int Counter { get; set; }
-        public int StatusFlag { get; set; }
-        public DateTime DoAfter { get; set; }
+        public JobStatus StatusFlag { get; set; }
+        public DateTime? DoAfter { get; set; }
         public DateTime CreatedAt { get; set; }
-        public DateTime UpdatedAt { get; set; }
+        public DateTime? UpdatedAt { get; set; }
     }
 }

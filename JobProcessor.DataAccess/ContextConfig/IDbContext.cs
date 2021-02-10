@@ -2,7 +2,7 @@
 using System;
 using System.Data.Entity;
 
-namespace JobProcessor.DataAccess.Services
+namespace JobProcessor.DataAccess.ContextConfig
 {
     public interface IDbContext : IDisposable
     {

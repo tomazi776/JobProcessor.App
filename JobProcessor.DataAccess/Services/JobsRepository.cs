@@ -1,4 +1,5 @@
-﻿using JobProcessor.DataAccess.Entities;
+﻿using JobProcessor.DataAccess.ContextConfig;
+using JobProcessor.DataAccess.Entities;
 
 namespace JobProcessor.DataAccess.Services
 {
