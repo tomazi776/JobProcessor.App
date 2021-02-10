@@ -13,7 +13,13 @@ namespace JobProcessor.App.Controllers
             this.jobService = jobService;
         }
 
-        public ActionResult Create(JobCreationViewModel job)
+        public ActionResult Index()
+        {
+            var jobs = jobService.Get();
+            return View(jobs);
+        }
+
+        public ActionResult Create(JobCreationVM job)
         {
             ModelState.Clear();
             return View(job);

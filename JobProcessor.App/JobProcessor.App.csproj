@@ -153,7 +153,8 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ViewModels\JobCreationViewModel.cs" />
+    <Compile Include="ViewModels\JobCreationVM.cs" />
+    <Compile Include="ViewModels\JobsVM.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-sketchy.css" />
