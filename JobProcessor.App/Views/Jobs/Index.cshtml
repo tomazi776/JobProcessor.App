@@ -12,16 +12,16 @@
 </p>
 <table class="table">
     <tr>
-        <th>
+        <th class="text-black-50">
             @Html.DisplayNameFor(Model => Model.Job.Name)
         </th>
-        <th>
+        <th class="text-black-50">
             @Html.DisplayNameFor(Model => Model.Job.Status)
         </th>
-        <th>
+        <th class="text-black-50">
             @Html.DisplayNameFor(Model => Model.Job.Counter)
         </th>
-        <th>
+        <th class="text-black-50">
             @Html.DisplayNameFor(Model => Model.Action)
         </th>
         <th></th>
@@ -30,11 +30,11 @@
     @foreach (var job in Model.Jobs)
     {
         <tr>
-            <th>@job.Name</th>
+            <th class="text-monospace">@job.Name</th>
             <th>@job.Status</th>
             <th>@job.Counter</th>
             <td>
-                @Html.ActionLink("Details", "Details", new { id = job.Id })
+                @Html.ActionLink("Details", "Details", new { id = job.Id }, new { @class = "btn btn-outline-dark btn-sm " })
             </td>
         </tr>
     }
