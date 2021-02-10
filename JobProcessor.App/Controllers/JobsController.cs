@@ -15,8 +15,9 @@ namespace JobProcessor.App.Controllers
 
         public ActionResult Index()
         {
-            var jobs = jobService.Get();
-            return View(jobs);
+            var jobsVM = new JobsVM();
+            jobsVM.Jobs = jobService.Get();
+            return View(jobsVM);
         }
 
         public ActionResult Create(JobCreationVM job)
@@ -31,7 +32,7 @@ namespace JobProcessor.App.Controllers
             if (ModelState.IsValid)
             {
                 jobService.Create(name, doAfter);
-                return RedirectToAction("Success");
+                return RedirectToAction("Index");
             }
             return View();
         }
