@@ -1,5 +1,7 @@
 ﻿using JobProcessor.DataAccess.ContextConfig;
 using JobProcessor.DataAccess.Entities;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace JobProcessor.DataAccess.Services
 {
@@ -16,6 +18,11 @@ namespace JobProcessor.DataAccess.Services
         {
             ctx.Jobs.Add(job);
             return ctx.SaveChanges();
+        }
+
+        public IEnumerable<Job> Get()
+        {
+            return ctx.Jobs.ToList();
         }
     }
 }
