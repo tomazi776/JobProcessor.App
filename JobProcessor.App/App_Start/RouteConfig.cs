@@ -21,7 +21,7 @@ namespace JobProcessor.App
 
             routes.MapRoute(
                 name: "Search",
-                url: "{controller}/{startIndex}",
+                url: "{controller}/{action}/{startIndex}/{pageSize}",
                 defaults: new { controller = "Jobs", action = "Index", startIndex = 0, pageSize = 10  });
         }
     }

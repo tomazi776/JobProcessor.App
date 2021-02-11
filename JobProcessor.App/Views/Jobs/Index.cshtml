@@ -13,7 +13,7 @@
 <table class="table">
     <tr>
         <th class="text-black-50">
-            @Html.Display("#")
+            #
         </th>
         <th class="text-black-50">
             @Html.DisplayNameFor(Model => Model.Job.Name)
@@ -25,14 +25,22 @@
             @Html.DisplayNameFor(Model => Model.Job.Counter)
         </th>
         <th class="text-black-50">
-            @Html.DisplayNameFor(Model => Model.Action)
+            Action
         </th>
-        <th></th>
     </tr>
 
+    @{ 
+        int rowNum = 0;
+        int currentPageSize = Model.JobsIndexMetadata.PageSize;
+        int currentPageStartIndex = Model.JobsIndexMetadata.StartIndex;
+    }
     @foreach (var job in Model.Jobs)
     {
+        rowNum++;
         <tr>
+            <th>
+                @rowNum
+            </th>
             <th class="text-monospace">@job.Name</th>
             <th>@job.Status</th>
             <th>@job.Counter</th>
@@ -43,3 +51,38 @@
     }
 
 </table>
+<div class="container">
+    <div class="row">
+        <div class="col-sm">
+            @if (Model.HasRecords(JobProcessor.App.ViewModels.Navigate.Previous))
+            {
+                @Html.ActionLink("Previous page", "Index",
+               new{ startIndex = (currentPageStartIndex - currentPageSize > 0) ? currentPageStartIndex - currentPageSize : 0,
+                   pageSize = currentPageSize},
+               new { @class = "btn btn-outline-dark" })
+            }
+            else
+            {
+                <p> No more records to show</p>
+            }
+        </div>
+        <div class="col-8"></div>
+        <div class="col-sm ">
+            @if (Model.HasRecords(JobProcessor.App.ViewModels.Navigate.Next))
+            {
+                @Html.ActionLink("Next page", "Index",
+               new{ startIndex = currentPageStartIndex + currentPageSize,
+               pageSize = currentPageSize},
+               new { @class = "btn btn-outline-dark" })
+            }
+            else
+            {
+                <p> No more records to show</p>
+            }
+        </div>
+    </div>
+</div>
+
+
+
+

@@ -2,9 +2,6 @@
 using JobProcessor.Domain.Services;
 using System;
 using System.Web.Mvc;
-using PagedList;
-using JobProcessor.DataAccess.Services;
-using JobProcessor.DataAccess.Entities;
 
 namespace JobProcessor.App.Controllers
 {
@@ -18,8 +15,7 @@ namespace JobProcessor.App.Controllers
 
         public ActionResult Index(int startIndex = 0, int pageSize = 2)
         {
-            var jobsVM = new JobsVM();
-            jobsVM.Jobs = jobService.GetFiltered(startIndex, pageSize);
+            var jobsVM = new JobsVM(jobService, startIndex, pageSize);
             return View(jobsVM);
         }
 

@@ -1,6 +1,5 @@
 ﻿using JobProcessor.DataAccess.Services;
 using JobProcessor.Domain.Models;
-using JobProcessor.Domain.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -46,6 +45,12 @@ namespace JobProcessor.Domain.Services
             var filtered = jobsRepository.FactorToPaginate(startIndex, pageSize);
             var mappedFiltered = mappingService.MapManyDALToDomainModel(filtered);
             return mappedFiltered.ToList();
+        }
+
+        public int GetFilteredCount(int startIndex = 0, int pageSize = 0)
+        {
+            var filteredCount = jobsRepository.GetFilteredCount(startIndex, pageSize);
+            return filteredCount;
         }
     }
 }
