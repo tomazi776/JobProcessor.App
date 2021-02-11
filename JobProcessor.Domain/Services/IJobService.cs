@@ -5,6 +5,6 @@ namespace JobProcessor.Domain.Services
 {
     public interface IJobService
     {
-        Job Create(string name, DateTime? doAfter = null);
+        Job Create(string name, out int affectedRows, DateTime? doAfter = null );
     }
 }

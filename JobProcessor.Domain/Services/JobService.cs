@@ -16,7 +16,7 @@ namespace JobProcessor.Domain.Services
             this.mappingService = mappingService;
         }
 
-        public Job Create(string name, DateTime? doAfter)
+        public Job Create(string name, out int affectedRows, DateTime? doAfter)
         {
             var newJob = new Job()
             {
@@ -29,7 +29,7 @@ namespace JobProcessor.Domain.Services
             };
 
             var mappedJob = mappingService.MapDomainToDALModel(newJob);
-            jobsRepository.Create(mappedJob);
+            affectedRows = jobsRepository.Create(mappedJob);
             return newJob;
         }
     }

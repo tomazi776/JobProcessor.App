@@ -13,27 +13,24 @@ namespace JobProcessor.App.Controllers
             this.jobService = jobService;
         }
 
-        public ActionResult Create(JobCreationViewModel job)
+        public ActionResult Create()
         {
-            ModelState.Clear();
-            return View(job);
+            return View(new JobCreationViewModel());
         }
 
         [HttpPost]
-        public ActionResult Create(string name, DateTime? doAfter)
+        public ActionResult Create(JobCreationViewModel job)
         {
-            if (ModelState.IsValid)
-            {
-                jobService.Create(name, doAfter);
-                return RedirectToAction("Success");
-            }
-            return View();
-        }
-
-        public ActionResult Success()
-        {
+            job.SubmitHit = true;
+            jobService.Create(job.Name, out int rowsAffected, job.DoAfter);
+            job.AffectedRows = rowsAffected;
             ModelState.Clear();
-            return Content("Job Created");
+
+            return View(new JobCreationViewModel() 
+            {
+                PreviousNameSubmitted = job.Name, 
+                AffectedRows = rowsAffected, SubmitHit = true 
+            });
         }
     }
 }

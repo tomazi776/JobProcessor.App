@@ -10,6 +10,6 @@ namespace JobProcessor.Domain.Models
         public JobStatus Status { get; set; }
         public DateTime? DoAfter { get; set; }
         public DateTime CreatedAt { get; set; }
-        public DateTime UpdatedAt { get; set; }
+        public DateTime? UpdatedAt { get; set; }
     }
 }

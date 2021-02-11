@@ -1,5 +1,6 @@
 ﻿using JobProcessor.DataAccess.ContextConfig;
 using JobProcessor.DataAccess.Entities;
+using System.Linq;
 
 namespace JobProcessor.DataAccess.Services
 {
@@ -14,8 +15,16 @@ namespace JobProcessor.DataAccess.Services
 
         public int Create(Job job)
         {
-            ctx.Jobs.Add(job);
-            return ctx.SaveChanges();
+            var exists = ctx.Jobs.Any(j => j.Name == job.Name);
+            if (exists)
+            {
+                return 0;
+            }
+            else
+            {
+                ctx.Jobs.Add(job);
+                return ctx.SaveChanges();
+            }
         }
     }
 }
