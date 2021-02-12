@@ -1,15 +1,27 @@
-﻿using System;
+﻿using JobProcessor.DataAccess;
+using System;
 
 namespace JobProcessor.Domain.Models
 {
     public class Job
     {
-        public Guid Id { get; set; }
-        public string Name { get; set; }
-        public int Counter { get; set; }
-        public JobStatus Status { get; set; }
-        public DateTime? DoAfter { get; set; }
-        public DateTime CreatedAt { get; set; }
-        public DateTime? UpdatedAt { get; set; }
+        public Job(Guid id, string name, JobStatus status, DateTime? doAfter, DateTime createdAt, DateTime? updatedAt, int counter = 0)
+        {
+            Id = id;
+            Name = name;
+            Counter = counter;
+            Status = status;
+            DoAfter = doAfter;
+            CreatedAt = createdAt;
+            UpdatedAt = updatedAt;
+        }
+
+        public Guid Id { get; private set; }
+        public string Name { get; private set; }
+        public int Counter { get; private set; }
+        public JobStatus Status { get; private set; }
+        public DateTime? DoAfter { get; private set; }
+        public DateTime CreatedAt { get; private set; }
+        public DateTime? UpdatedAt { get; private set; }
     }
 }

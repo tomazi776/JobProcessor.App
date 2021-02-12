@@ -1,4 +1,5 @@
-﻿using JobProcessor.DataAccess.JobsRepository;
+﻿using JobProcessor.DataAccess;
+using JobProcessor.DataAccess.JobsRepository;
 using JobProcessor.Domain.Models;
 using System;
 
@@ -17,17 +18,8 @@ namespace JobProcessor.Domain.Services
 
         public EntityStateResult<Job> Create(string name, DateTime? doAfter)
         {
-            var newJob = new Job()
-            {
-                Id = Guid.NewGuid(),
-                CreatedAt = DateTime.Now,
-                Name = name,
-                DoAfter = doAfter,
-                UpdatedAt = DateTime.Now,
-                Status = JobStatus.New
-            };
-
-            var job = mappingService.MapDomainToDALModel(newJob);
+            var domainJob = new Job(Guid.NewGuid(), name, JobStatus.New, doAfter, DateTime.Now, DateTime.Now);
+            var job = mappingService.MapDomainToDALModel(domainJob);
             return (jobsRepository.Exist(job))
                 ? new EntityStateResult<Job>() { ErrorMsg = "There already exists job with that name. Pick unique one.", Data = null }
                 : new EntityStateResult<Job>() { Data = mappingService.MapDALToDomainModel(jobsRepository.Create(job)) };
