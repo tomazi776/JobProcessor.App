@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Services\EntityStateResult.cs" />
     <Compile Include="Services\IIntermediaryMappingService.cs" />
     <Compile Include="Services\IntermediaryMapper.cs" />
     <Compile Include="Services\JobService.cs" />

@@ -1,4 +1,5 @@
 ﻿using JobProcessor.App.ViewModels;
+using JobProcessor.Domain.Models;
 using JobProcessor.Domain.Services;
 using System;
 using System.Web.Mvc;
@@ -21,15 +22,19 @@ namespace JobProcessor.App.Controllers
         [HttpPost]
         public ActionResult Create(JobCreationViewModel job)
         {
+            EntityStateResult<Job> result = new EntityStateResult<Job>();
             job.SubmitHit = true;
-            jobService.Create(job.Name, out int rowsAffected, job.DoAfter);
-            job.AffectedRows = rowsAffected;
-            ModelState.Clear();
-
-            return View(new JobCreationViewModel() 
+            if (ModelState.IsValid)
             {
-                PreviousNameSubmitted = job.Name, 
-                AffectedRows = rowsAffected, SubmitHit = true 
+                result = jobService.Create(job.Name, job.DoAfter);
+            }
+
+            ModelState.Clear();
+            return View(new JobCreationViewModel()
+            {
+                PreviousNameSubmitted = job.Name,
+                SubmitHit = true,
+                JobCreated = result.Success
             });
         }
     }

@@ -1,6 +1,5 @@
-﻿using JobProcessor.DataAccess.Services;
+﻿using JobProcessor.DataAccess.JobsRepository;
 using JobProcessor.Domain.Models;
-using JobProcessor.Domain.Services;
 using System;
 
 namespace JobProcessor.Domain.Services
@@ -16,7 +15,7 @@ namespace JobProcessor.Domain.Services
             this.mappingService = mappingService;
         }
 
-        public Job Create(string name, out int affectedRows, DateTime? doAfter)
+        public EntityStateResult<Job> Create(string name, DateTime? doAfter)
         {
             var newJob = new Job()
             {
@@ -28,9 +27,10 @@ namespace JobProcessor.Domain.Services
                 Status = JobStatus.New
             };
 
-            var mappedJob = mappingService.MapDomainToDALModel(newJob);
-            affectedRows = jobsRepository.Create(mappedJob);
-            return newJob;
+            var job = mappingService.MapDomainToDALModel(newJob);
+            return (jobsRepository.Exist(job))
+                ? new EntityStateResult<Job>() { ErrorMsg = "There already exists job with that name. Pick unique one.", Data = null }
+                : new EntityStateResult<Job>() { Data = mappingService.MapDALToDomainModel(jobsRepository.Create(job)) };
         }
     }
 }

@@ -1,5 +1,5 @@
 ﻿using JobProcessor.DataAccess.ContextConfig;
-using JobProcessor.DataAccess.Services;
+using JobProcessor.DataAccess.JobsRepository;
 using JobProcessor.Domain.Services;
 using System;
 using Unity;

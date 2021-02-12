@@ -1,6 +1,5 @@
 ﻿using JobProcessor.DataAccess.Entities;
 using JobProcessor.DataAccess.Migrations;
-using JobProcessor.DataAccess.Services;
 using System.Data.Entity;
 
 namespace JobProcessor.DataAccess.ContextConfig
