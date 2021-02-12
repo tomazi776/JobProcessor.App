@@ -1,15 +1,16 @@
 ﻿namespace JobProcessor.DataAccess.Migrations
 {
+    using JobProcessor.DataAccess.ContextConfig;
     using System.Data.Entity.Migrations;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<JobProcessor.DataAccess.JobProcessorContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<JobProcessorContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
         }
 
-        protected override void Seed(JobProcessor.DataAccess.JobProcessorContext context)
+        protected override void Seed(JobProcessorContext context)
         {
             //  This method will be called after migrating to the latest version.
 
