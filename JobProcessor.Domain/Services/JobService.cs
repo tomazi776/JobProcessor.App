@@ -2,6 +2,8 @@
 using JobProcessor.DataAccess.JobsRepository;
 using JobProcessor.Domain.Models;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace JobProcessor.Domain.Services
 {
@@ -23,6 +25,25 @@ namespace JobProcessor.Domain.Services
             return (jobsRepository.Exist(job))
                 ? new EntityStateResult<Job>() { ErrorMsg = "There already exists job with that name. Pick unique one.", Data = null }
                 : new EntityStateResult<Job>() { Data = mappingService.MapDALToDomainModel(jobsRepository.Create(job)) };
+        }
+
+        public List<Job> Get()
+        {
+            var dalJobs = jobsRepository.Get();
+            return mappingService.MapManyDALToDomainModel(dalJobs).ToList();
+        }
+
+        public List<Job> GetFiltered(int startIndex = 0, int pageSize = 0)
+        {
+            var filtered = jobsRepository.FactorToPaginate(startIndex, pageSize);
+            var mappedFiltered = mappingService.MapManyDALToDomainModel(filtered);
+            return mappedFiltered.ToList();
+        }
+
+        public int GetFilteredCount(int startIndex = 0, int pageSize = 0)
+        {
+            var filteredCount = jobsRepository.GetFilteredCount(startIndex, pageSize);
+            return filteredCount;
         }
     }
 }

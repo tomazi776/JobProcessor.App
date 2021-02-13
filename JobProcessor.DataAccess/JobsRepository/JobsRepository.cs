@@ -23,5 +23,31 @@ namespace JobProcessor.DataAccess.JobsRepository
         }
 
         public bool Exist(Job job) => ctx.Jobs.Any(j => j.Name == job.Name);
+
+        public IEnumerable<Job> Get()
+        {
+            return ctx.Jobs.ToList();
+        }
+
+        public IEnumerable<Job> FactorToPaginate(int startIndex, int pageSize)
+        {
+            if (startIndex < 0)
+            {
+                startIndex = 0;
+            }
+            if (pageSize < 0)
+            {
+                pageSize = 0;
+            }
+            var factored = ctx.Jobs.OrderBy(j => j.CreatedAt).Skip(startIndex).Take(pageSize);
+            var dupal = factored.ToList();
+            return factored;
+        }
+
+        public int GetFilteredCount(int startIndex, int pageSize)
+        {
+            var factoredCount = ctx.Jobs.OrderBy(j => j.CreatedAt).Skip(startIndex).Take(pageSize).Count();
+            return factoredCount;
+        }
     }
 }

@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace JobProcessor.App.ViewModels
 {
-    public class JobCreationViewModel
+    public class JobCreationVM
     {
         [Display(Name = "Unique Job name")]
         [RegularExpression(@".*\S+.*", ErrorMessage = "No white space allowed")]

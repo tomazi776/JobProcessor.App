@@ -14,7 +14,13 @@ namespace JobProcessor.App.Controllers
             this.jobService = jobService;
         }
 
-        public ActionResult Create()
+        public ActionResult Index(int startIndex = 0, int pageSize = 2)
+        {
+            var jobsVM = new JobsVM(jobService, startIndex, pageSize);
+            return View(jobsVM);
+        }
+
+        public ActionResult Create(JobCreationVM job)
         {
             return View(new JobCreationViewModel());
         }
