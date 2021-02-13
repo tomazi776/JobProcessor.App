@@ -20,13 +20,13 @@ namespace JobProcessor.App.Controllers
             return View(jobsVM);
         }
 
-        public ActionResult Create(JobCreationVM job)
+        public ActionResult Create()
         {
-            return View(new JobCreationViewModel());
+            return View(new JobCreationVM());
         }
 
         [HttpPost]
-        public ActionResult Create(JobCreationViewModel job)
+        public ActionResult Create(JobCreationVM job)
         {
             EntityStateResult<Job> result = new EntityStateResult<Job>();
             job.SubmitHit = true;
@@ -36,7 +36,7 @@ namespace JobProcessor.App.Controllers
             }
 
             ModelState.Clear();
-            return View(new JobCreationViewModel()
+            return View(new JobCreationVM()
             {
                 PreviousNameSubmitted = job.Name,
                 SubmitHit = true,
