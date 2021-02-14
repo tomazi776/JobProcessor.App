@@ -7,9 +7,8 @@ using System.Threading.Tasks;
 
 namespace JobProcessor.DataAccess.Services
 {
-    public interface IFiltrable<TEntity> where TEntity : class
+    public interface IFiltrable
     {
-        IEnumerable<TEntity> FactorToPaginate(int startIndex = 0, int pageSize = 0);
         int GetFilteredCount(int startIndex, int pageSize);
 
     }

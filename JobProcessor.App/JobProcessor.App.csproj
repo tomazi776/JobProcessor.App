@@ -153,11 +153,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ViewModels\IPaginateable.cs" />
     <Compile Include="ViewModels\JobCreationVM.cs" />
-    <Compile Include="ViewModels\JobsIndexMetadata.cs" />
     <Compile Include="ViewModels\JobsVM.cs" />
-    <Compile Include="ViewModels\Navigate.cs" />
+    <Compile Include="ViewModels\Navigation.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-sketchy.css" />

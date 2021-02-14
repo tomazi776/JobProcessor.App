@@ -1,5 +1,6 @@
 ﻿using JobProcessor.DataAccess;
 using JobProcessor.DataAccess.JobsRepository;
+using JobProcessor.DataAccess.Services;
 using JobProcessor.Domain.Models;
 using System;
 using System.Collections.Generic;
@@ -27,17 +28,22 @@ namespace JobProcessor.Domain.Services
                 : new EntityStateResult<Job>() { Data = mappingService.MapDALToDomainModel(jobsRepository.Create(job)) };
         }
 
-        public List<Job> Get()
+        public List<Job> Get(Metadata withMetadata)
         {
-            var dalJobs = jobsRepository.Get();
-            return mappingService.MapManyDALToDomainModel(dalJobs).ToList();
-        }
+            IEnumerable<DataAccess.Entities.Job> jobs;
+            IEnumerable<Job> mappedJobs;
 
-        public List<Job> GetFiltered(int startIndex = 0, int pageSize = 0)
-        {
-            var filtered = jobsRepository.FactorToPaginate(startIndex, pageSize);
-            var mappedFiltered = mappingService.MapManyDALToDomainModel(filtered);
-            return mappedFiltered.ToList();
+            if (withMetadata is null)
+            {
+                jobs = jobsRepository.Get();
+                mappedJobs = mappingService.MapManyDALToDomainModel(jobs);
+            }
+            else
+            {
+                jobs = jobsRepository.Get(withMetadata);
+                mappedJobs = mappingService.MapManyDALToDomainModel(jobs);
+            }
+            return mappedJobs.ToList();
         }
 
         public int GetFilteredCount(int startIndex = 0, int pageSize = 0)

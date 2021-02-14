@@ -84,7 +84,8 @@
     <Compile Include="ContextConfig\IDbContext.cs" />
     <Compile Include="JobsRepository\IJobsRepository.cs" />
     <Compile Include="JobsRepository\JobsRepository.cs" />
-    <Compile Include="Services\IJobsRepository.cs" />
+    <Compile Include="Services\IPaginateable.cs" />
+    <Compile Include="Services\Metadata.cs" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />

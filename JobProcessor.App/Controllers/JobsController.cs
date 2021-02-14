@@ -1,4 +1,5 @@
 ﻿using JobProcessor.App.ViewModels;
+using JobProcessor.DataAccess.Services;
 using JobProcessor.Domain.Models;
 using JobProcessor.Domain.Services;
 using System;
@@ -14,9 +15,9 @@ namespace JobProcessor.App.Controllers
             this.jobService = jobService;
         }
 
-        public ActionResult Index(int startIndex = 0, int pageSize = 2)
+        public ActionResult Index(Metadata metadata)
         {
-            var jobsVM = new JobsVM(jobService, startIndex, pageSize);
+            var jobsVM = new JobsVM(jobService, metadata);
             return View(jobsVM);
         }
 

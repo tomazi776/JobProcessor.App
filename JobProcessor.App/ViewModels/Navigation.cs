@@ -1,7 +1,7 @@
 ﻿
 namespace JobProcessor.App.ViewModels
 {
-    public enum Navigate
+    public enum Navigation
     {
         Previous,
         Next

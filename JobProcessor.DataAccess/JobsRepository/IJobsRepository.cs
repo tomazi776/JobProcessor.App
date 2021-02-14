@@ -6,11 +6,10 @@ using System.Linq.Expressions;
 
 namespace JobProcessor.DataAccess.JobsRepository
 {
-    public interface IJobsRepository : IFiltrable<Job>
+    public interface IJobsRepository : IFiltrable
     {
         Job Create(Job job);
         bool Exist(Job job);
-        IEnumerable<Job> Get();
-
+        IEnumerable<Job> Get(Metadata withMetadata = null);
     }
 }

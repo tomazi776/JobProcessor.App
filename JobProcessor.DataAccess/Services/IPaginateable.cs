@@ -1,5 +1,5 @@
 ﻿
-namespace JobProcessor.App.ViewModels
+namespace JobProcessor.DataAccess.Services
 {
     public interface IPaginateable
     {
