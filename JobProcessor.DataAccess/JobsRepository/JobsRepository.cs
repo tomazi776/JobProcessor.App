@@ -35,8 +35,7 @@ namespace JobProcessor.DataAccess.JobsRepository
 
         public int GetFilteredCount(int startIndex, int pageSize)
         {
-            var factoredCount = ctx.Jobs.OrderBy(j => j.CreatedAt).Skip(startIndex).Take(pageSize).Count();
-            return factoredCount;
+            return ctx.Jobs.OrderBy(j => j.CreatedAt).Skip(startIndex).Take(pageSize).Count();
         }
     }
 }

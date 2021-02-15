@@ -1,4 +1,5 @@
 ﻿@model JobProcessor.App.ViewModels.JobsVM
+@using JobProcessor.App.ViewModels;
 
 @{
     ViewBag.Title = "Index";
@@ -58,6 +59,9 @@
             </td>
         </tr>
     }
+    @{
+        int backPageIndex = Model.GetPreviousPageIndex();
+    }
 
 </table>
 <div class="container">
@@ -66,32 +70,27 @@
         <div class="col-4">
             <ul class="pagination">
                 <li>
-                    @if (Model.HasRecords(JobProcessor.App.ViewModels.Navigation.Previous))
+                    @if (Model.HasRecords(Navigation.Previous))
                     {
-                        int backPageIndex = Model.SetBackPageIndex();
                         @Html.ActionLink("Previous", "Index",
-                       new
-                            {
-                                startIndex = backPageIndex,
-                           pageSize = currentPageSize
-                            },
+                       new { startIndex = backPageIndex, pageSize = currentPageSize },
                        new { @class = "btn btn-outline-dark", id = "nextPageBtn" })
                     }
                 </li>
-                <li><a class="btn btn-outline-secondary disabled" href="#">1</a></li>
-                <li><a class="btn btn-outline-info" href="#">2</a></li>
-                <li><a class="btn btn-outline-info" href="#">3</a></li>
-                <li><a class="btn btn-outline-info" href="#">4</a></li>
-                <li><a class="btn btn-outline-info" href="#">5</a></li>
+
+                @foreach (var nextPage in Model.PagesSlice)
+                {
+                    <li>
+                        @Html.ActionLink(nextPage.Number.ToString(), "Index",
+                            new { startIndex = nextPage.GetLandingPageIndex(nextPage.Number).ToString(), pageSize = currentPageSize },
+                            new { @class = "btn btn-outline-info" })
+                    </li>
+                }
                 <li>
-                    @if (Model.HasRecords(JobProcessor.App.ViewModels.Navigation.Next))
+                    @if (Model.HasRecords(Navigation.Next))
                     {
                         @Html.ActionLink("Next", "Index",
-                       new
-                            {
-                                startIndex = currentPageStartIndex,
-                       pageSize = currentPageSize
-                            },
+                       new { startIndex = currentPageStartIndex, pageSize = currentPageSize },
                        new { @class = "btn btn-outline-dark" })
                     }
                 </li>

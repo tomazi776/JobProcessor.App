@@ -48,8 +48,7 @@ namespace JobProcessor.Domain.Services
 
         public int GetFilteredCount(int startIndex = 0, int pageSize = 0)
         {
-            var filteredCount = jobsRepository.GetFilteredCount(startIndex, pageSize);
-            return filteredCount;
+            return jobsRepository.GetFilteredCount(startIndex, pageSize);
         }
     }
 }
