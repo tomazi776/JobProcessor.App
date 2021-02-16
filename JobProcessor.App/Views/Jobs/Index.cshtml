@@ -41,8 +41,8 @@
     </tr>
 
     @{
-        int currentPageSize = Model.Metadata.PageSize;
-        int currentPageStartIndex = Model.Metadata.StartIndex;
+        int currentPageSize = Model.Current.Metadata.PageSize;
+        int currentPageStartIndex = Model.Current.Metadata.StartIndex;
     }
     @foreach (var job in Model.Jobs)
     {
@@ -59,10 +59,6 @@
             </td>
         </tr>
     }
-    @{
-        int backPageIndex = Model.GetPreviousPageIndex();
-    }
-
 </table>
 <div class="container">
     <div class="row">
@@ -73,16 +69,29 @@
                     @if (Model.HasRecords(Navigation.Previous))
                     {
                         @Html.ActionLink("Previous", "Index",
-                       new { startIndex = backPageIndex, pageSize = currentPageSize },
+                       new { startIndex = Model.Current.GetLandingPageStartIndex(Model.Current.Number - 1)
+                       , pageSize = currentPageSize },
                        new { @class = "btn btn-outline-dark", id = "nextPageBtn" })
                     }
                 </li>
-
-                @foreach (var nextPage in Model.PagesSlice)
+                @foreach (var previous in Model.PreviousPagesSlice)
                 {
                     <li>
-                        @Html.ActionLink(nextPage.Number.ToString(), "Index",
-                            new { startIndex = nextPage.GetLandingPageIndex(nextPage.Number).ToString(), pageSize = currentPageSize },
+                        @Html.ActionLink(previous.Number.ToString(), "Index",
+                            new { startIndex = previous.GetLandingPageStartIndex(previous.Number).ToString(), pageSize = currentPageSize },
+                            new { @class = "btn btn-outline-info" })
+                    </li>
+                }
+                <li>
+                    @Html.ActionLink(Model.Current.Number.ToString(), "Index",
+                    new { startIndex = currentPageStartIndex.ToString(), pageSize = currentPageSize },
+                    new { @class = "btn disabled", @id = "middle" })
+                </li>
+                @foreach (var next in Model.NextPagesSlice)
+                {
+                    <li>
+                        @Html.ActionLink(next.Number.ToString(), "Index",
+                            new { startIndex = next.GetLandingPageStartIndex(next.Number).ToString(), pageSize = currentPageSize },
                             new { @class = "btn btn-outline-info" })
                     </li>
                 }
@@ -98,9 +107,5 @@
         </div>
     </div>
 </div>
-
-
-
-
 
 
