@@ -6,20 +6,23 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>List of Jobs</h1>
-<nav aria-label="Page navigation">
-    <div class="container">
-        <div class="row">
-            <div class="col-5"></div>
-            <div class="col-5">
-                <p>
-                    @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-outline-dark btn-lg " })
-                </p>
-            </div>
-            <div class="col-2"></div>
+
+<div class="container">
+    <row class="row ml-2 mt-5 ">
+        <div class="col-6">
+            <h1 id="title" class="">List of Jobs</h1>
         </div>
-    </div>
-</nav>
+        <div class="col-3"></div>
+        <div class="col-3">
+            <nav class="mb-5 ml-5" aria-label="Page navigation">
+                <div>
+                    @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-outline-dark btn-lg " })
+                </div>
+            </nav>
+        </div>
+    </row>
+</div>
+
 
 <table id="jobsTable" class="table">
     <tr>
@@ -51,10 +54,10 @@
             <th class="col-2">
                 @currentPageStartIndex
             </th>
-            <th class="text-monospace col-4">@job.Name</th>
-            <th class="col-2">@job.Status</th>
-            <th class="col-2">@job.Counter</th>
-            <td class="col-2">
+            <th class="text-monospace col-4 highlitable">@job.Name</th>
+            <th class="col-2 highlitable">@job.Status</th>
+            <th class="col-2 highlitable">@job.Counter</th>
+            <td class="col-2 highlitable">
                 @Html.ActionLink("Details", "Details", new { id = job.Id }, new { @class = "btn btn-outline-dark btn-sm " })
             </td>
         </tr>
@@ -69,8 +72,12 @@
                     @if (Model.HasRecords(Navigation.Previous))
                     {
                         @Html.ActionLink("Previous", "Index",
-                       new { startIndex = Model.Current.GetLandingPageStartIndex(Model.Current.Number - 1)
-                       , pageSize = currentPageSize },
+                       new
+                            {
+                                startIndex = Model.Current.GetLandingPageStartIndex(Model.Current.Number - 1)
+                       ,
+                                pageSize = currentPageSize
+                            },
                        new { @class = "btn btn-outline-dark", id = "nextPageBtn" })
                     }
                 </li>
@@ -85,7 +92,7 @@
                 <li>
                     @Html.ActionLink(Model.Current.Number.ToString(), "Index",
                     new { startIndex = currentPageStartIndex.ToString(), pageSize = currentPageSize },
-                    new { @class = "btn disabled", @id = "middle" })
+                    new { @class = "btn disabled current-page", @id = "middle" })
                 </li>
                 @foreach (var next in Model.NextPagesSlice)
                 {
@@ -107,5 +114,18 @@
         </div>
     </div>
 </div>
+
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $('#title').hide().fadeIn(500);
+            $('.current-page').delay(500).css({
+                border: '2px solid red'
+            });
+        });
+    </script>
+}
 
 
