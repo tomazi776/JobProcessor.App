@@ -50,14 +50,14 @@
     @foreach (var job in Model.Jobs)
     {
         currentPageStartIndex++;
-        <tr>
+        <tr class="highlitable">
             <th class="col-2">
                 @currentPageStartIndex
             </th>
-            <th class="text-monospace col-4 highlitable">@job.Name</th>
-            <th class="col-2 highlitable">@job.Status</th>
-            <th class="col-2 highlitable">@job.Counter</th>
-            <td class="col-2 highlitable">
+            <th class="text-monospace col-4">@job.Name</th>
+            <th class="col-2">@job.Status</th>
+            <th class="col-2">@job.Counter</th>
+            <td class="col-2">
                 @Html.ActionLink("Details", "Details", new { id = job.Id }, new { @class = "btn btn-outline-dark btn-sm " })
             </td>
         </tr>
@@ -124,6 +124,17 @@
             $('.current-page').delay(500).css({
                 border: '2px solid red'
             });
+
+            $('.highlitable').on('mouseover', function () {
+
+                var rowToHighlight = $(this);
+                rowToHighlight.children().css('background-color', '#F5F5F5');
+            })
+
+            $('.highlitable').on('mouseout', function () {
+                var rowToHighlight = $(this);
+                rowToHighlight.children().css('background-color', 'white');
+            })
         });
     </script>
 }
