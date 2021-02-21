@@ -24,5 +24,11 @@ namespace JobProcessor.Domain.Services
                 ? new EntityStateResult<Job>() { ErrorMsg = "There already exists job with that name. Pick unique one.", Data = null }
                 : new EntityStateResult<Job>() { Data = mappingService.MapDALToDomainModel(jobsRepository.Create(job)) };
         }
+
+        public EntityStateResult<Job> GetById(Guid jobId)
+        {
+            var job = jobsRepository.GetById(jobId);
+            return new EntityStateResult<Job>() { Data = mappingService.MapDALToDomainModel(job) };
+        }
     }
 }

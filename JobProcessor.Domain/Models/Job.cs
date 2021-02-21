@@ -5,6 +5,10 @@ namespace JobProcessor.Domain.Models
 {
     public class Job
     {
+        public Job()
+        {
+
+        }
         public Job(Guid id, string name, JobStatus status, DateTime? doAfter, DateTime createdAt, DateTime? updatedAt, DateTime? processedAt, int counter = 0)
         {
             Id = id;

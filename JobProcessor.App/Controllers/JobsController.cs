@@ -37,5 +37,13 @@ namespace JobProcessor.App.Controllers
                 JobCreated = result.Success
             });
         }
+        
+        [HttpGet]
+        public ActionResult Details(Job job)
+        {
+            var detailedJob = jobService.GetById(job.Id);
+            var detailsVm = new JobDetailsVM(detailedJob.Data);
+            return View(detailsVm);
+        }
     }
 }

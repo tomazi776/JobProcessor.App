@@ -23,5 +23,10 @@ namespace JobProcessor.DataAccess.JobsRepository
         }
 
         public bool Exist(Job job) => ctx.Jobs.Any(j => j.Name == job.Name);
+
+        public Job GetById(Guid Id)
+        {
+            return ctx.Jobs.FirstOrDefault(job => job.Id == Id);
+        }
     }
 }

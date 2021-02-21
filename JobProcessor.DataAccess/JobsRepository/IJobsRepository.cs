@@ -8,5 +8,6 @@ namespace JobProcessor.DataAccess.JobsRepository
     {
         Job Create(Job job);
         bool Exist(Job job);
+        Job GetById(Guid Id);
     }
 }
