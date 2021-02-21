@@ -37,5 +37,10 @@ namespace JobProcessor.DataAccess.JobsRepository
         {
             return ctx.Jobs.OrderBy(j => j.CreatedAt).Skip(startIndex).Take(pageSize).Count();
         }
+
+        public Job GetById(Guid Id)
+        {
+            return ctx.Jobs.FirstOrDefault(job => job.Id == Id);
+        }
     }
 }

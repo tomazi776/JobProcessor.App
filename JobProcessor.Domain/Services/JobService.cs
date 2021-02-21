@@ -38,5 +38,11 @@ namespace JobProcessor.Domain.Services
         {
             return jobsRepository.GetFilteredCount(startIndex, pageSize);
         }
+
+        public EntityStateResult<Job> GetById(Guid jobId)
+        {
+            var job = jobsRepository.GetById(jobId);
+            return new EntityStateResult<Job>() { Data = mappingService.MapDALToDomainModel(job) };
+        }
     }
 }
