@@ -1,0 +1,98 @@
+﻿
+@model JobProcessor.App.ViewModels.JobsVM
+@using JobProcessor.App.ViewModels;
+
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+@Scripts.Render("~/bundles/grids")
+
+<table id="jobsTable" class="table">
+    <tr>
+        <th class="text-black-50">
+            #
+        </th>
+        <th class="text-black-50">
+            @Html.DisplayNameFor(Model => Model.Job.Name)
+        </th>
+        <th class="text-black-50">
+            @Html.DisplayNameFor(Model => Model.Job.Status)
+        </th>
+        <th class="text-black-50">
+            @Html.DisplayNameFor(Model => Model.Job.Counter)
+        </th>
+        <th class="text-black-50">
+            Action
+        </th>
+    </tr>
+
+    @{
+        int currentPageSize = Model.Current.Metadata.PageSize;
+        int currentPageStartIndex = Model.Current.Metadata.StartIndex;
+    }
+    @foreach (var job in Model.Jobs)
+    {
+        currentPageStartIndex++;
+        <tr class="highlitable">
+            <th>
+                @currentPageStartIndex
+            </th>
+            <th class="text-monospace">@job.Name</th>
+            <th>@job.Status</th>
+            <th>@job.Counter</th>
+            <td>
+                @Html.ActionLink("Details", "Details", new { id = job.Id }, new { @class = "btn btn-outline-dark btn-sm " })
+            </td>
+        </tr>
+    }
+</table>
+
+<div class="container">
+    <div class="row">
+        <div class="col-8"></div>
+        <div class="col-4">
+            <ul class="pagination">
+                <li>
+                    @if (Model.HasRecords(Navigation.Previous))
+                    {
+                        @Ajax.ActionLink("Previous", "GetAll",
+                           new { startIndex = Model.Current.GetLandingPageStartIndex(Model.Current.Number - 1), pageSize = currentPageSize },
+                           new AjaxOptions() { HttpMethod = "GET", UpdateTargetId = "jobsGrid" },
+                           new { @class = "btn btn-outline-dark" })
+                    }
+                </li>
+                @foreach (var previous in Model.PreviousPagesSlice)
+                {
+                    <li>
+                        @Ajax.ActionLink(previous.Number.ToString(), "GetAll",
+                            new { startIndex = previous.GetLandingPageStartIndex(previous.Number).ToString(), pageSize = currentPageSize },
+                            new AjaxOptions() { HttpMethod = "GET", UpdateTargetId = "jobsGrid" },
+                            new { @class = "btn btn-outline-info" })
+                    </li>
+                }
+                <li>
+                    @Ajax.ActionLink(Model.Current.Number.ToString(), "GetAll",
+                        new { startIndex = currentPageStartIndex.ToString(), pageSize = currentPageSize },
+                        new AjaxOptions() { HttpMethod = "GET", UpdateTargetId = "jobsGrid" },
+                        new { @class = "btn disabled current-page", @id = "middle", style = "border: 2px solid red" })
+                </li>
+                @foreach (var next in Model.NextPagesSlice)
+                {
+                    <li>
+                        @Ajax.ActionLink(next.Number.ToString(), "GetAll",
+                            new { startIndex = next.GetLandingPageStartIndex(next.Number).ToString(), pageSize = currentPageSize },
+                            new AjaxOptions() { HttpMethod = "GET", UpdateTargetId = "jobsGrid" },
+                            new { @class = "btn btn-outline-info" })
+                    </li>
+                }
+                <li>
+                    @if (Model.HasRecords(Navigation.Next))
+                    {
+                        @Ajax.ActionLink("NextPage", "GetAll",
+                            new { startIndex = currentPageStartIndex, pageSize = currentPageSize },
+                            new AjaxOptions() { HttpMethod = "GET", UpdateTargetId = "jobsGrid" },
+                            new { @class = "btn btn-outline-dark" })
+                    }
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

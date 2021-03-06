@@ -21,6 +21,12 @@ namespace JobProcessor.App.Controllers
             return View(jobsVM);
         }
 
+        public PartialViewResult GetAll(Metadata metadata)
+        {
+            var jobsVm = new JobsVM(jobService, metadata);
+            return PartialView(jobsVm);
+        }
+
         public ActionResult Create()
         {
             return View(new JobCreationVM());

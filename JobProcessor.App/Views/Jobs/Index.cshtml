@@ -6,6 +6,8 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<script src="~/Scripts/jquery-3.4.1.js"></script>
+<script src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.js")" type="text/javascript"></script>
 
 <div class="container">
     <row class="row ml-2 mt-5 ">
@@ -23,120 +25,11 @@
     </row>
 </div>
 
-
-<table id="jobsTable" class="table">
-    <tr>
-        <th class="text-black-50">
-            #
-        </th>
-        <th class="text-black-50">
-            @Html.DisplayNameFor(Model => Model.Job.Name)
-        </th>
-        <th class="text-black-50">
-            @Html.DisplayNameFor(Model => Model.Job.Status)
-        </th>
-        <th class="text-black-50">
-            @Html.DisplayNameFor(Model => Model.Job.Counter)
-        </th>
-        <th class="text-black-50">
-            Action
-        </th>
-    </tr>
-
-    @{
-        int currentPageSize = Model.Current.Metadata.PageSize;
-        int currentPageStartIndex = Model.Current.Metadata.StartIndex;
-    }
-    @foreach (var job in Model.Jobs)
-    {
-        currentPageStartIndex++;
-        <tr class="highlitable">
-            <th class="col-2">
-                @currentPageStartIndex
-            </th>
-            <th class="text-monospace col-4">@job.Name</th>
-            <th class="col-2">@job.Status</th>
-            <th class="col-2">@job.Counter</th>
-            <td class="col-2">
-                @Html.ActionLink("Details", "Details", new { id = job.Id }, new { @class = "btn btn-outline-dark btn-sm " })
-            </td>
-        </tr>
-    }
-</table>
-<div class="container">
-    <div class="row">
-        <div class="col-8"></div>
-        <div class="col-4">
-            <ul class="pagination">
-                <li>
-                    @if (Model.HasRecords(Navigation.Previous))
-                    {
-                        @Html.ActionLink("Previous", "Index",
-                       new
-                            {
-                                startIndex = Model.Current.GetLandingPageStartIndex(Model.Current.Number - 1)
-                       ,
-                                pageSize = currentPageSize
-                            },
-                       new { @class = "btn btn-outline-dark", id = "nextPageBtn" })
-                    }
-                </li>
-                @foreach (var previous in Model.PreviousPagesSlice)
-                {
-                    <li>
-                        @Html.ActionLink(previous.Number.ToString(), "Index",
-                            new { startIndex = previous.GetLandingPageStartIndex(previous.Number).ToString(), pageSize = currentPageSize },
-                            new { @class = "btn btn-outline-info" })
-                    </li>
-                }
-                <li>
-                    @Html.ActionLink(Model.Current.Number.ToString(), "Index",
-                    new { startIndex = currentPageStartIndex.ToString(), pageSize = currentPageSize },
-                    new { @class = "btn disabled current-page", @id = "middle" })
-                </li>
-                @foreach (var next in Model.NextPagesSlice)
-                {
-                    <li>
-                        @Html.ActionLink(next.Number.ToString(), "Index",
-                            new { startIndex = next.GetLandingPageStartIndex(next.Number).ToString(), pageSize = currentPageSize },
-                            new { @class = "btn btn-outline-info" })
-                    </li>
-                }
-                <li>
-                    @if (Model.HasRecords(Navigation.Next))
-                    {
-                        @Html.ActionLink("Next", "Index",
-                       new { startIndex = currentPageStartIndex, pageSize = currentPageSize },
-                       new { @class = "btn btn-outline-dark" })
-                    }
-                </li>
-            </ul>
-        </div>
-    </div>
+<div id="jobsGrid">
+    @Html.Partial("GetAll", Model)
 </div>
 
 <script src="~/Scripts/jquery-3.4.1.js"></script>
 
-@section scripts{
-    <script>
-        $(document).ready(function () {
-            $('#title').hide().fadeIn(500);
-            $('.current-page').delay(500).css({
-                border: '2px solid red'
-            });
-
-            $('.highlitable').on('mouseover', function () {
-
-                var rowToHighlight = $(this);
-                rowToHighlight.children().css('background-color', '#F5F5F5');
-            })
-
-            $('.highlitable').on('mouseout', function () {
-                var rowToHighlight = $(this);
-                rowToHighlight.children().css('background-color', 'white');
-            })
-        });
-    </script>
-}
 
 
