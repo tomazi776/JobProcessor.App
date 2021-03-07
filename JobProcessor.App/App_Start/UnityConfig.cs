@@ -1,8 +1,10 @@
-﻿using JobProcessor.DataAccess.ContextConfig;
+﻿using JobProcessor.App.Services;
+using JobProcessor.DataAccess.ContextConfig;
 using JobProcessor.DataAccess.JobsRepository;
 using JobProcessor.Domain.Services;
 using System;
 using Unity;
+using Unity.Injection;
 
 namespace JobProcessor.App.App_Start
 {
@@ -24,7 +26,9 @@ namespace JobProcessor.App.App_Start
             container.RegisterType<IJobsRepository, JobsRepository>();
             container.RegisterType<IIntermediaryMappingService, IntermediaryMapper>();
             container.RegisterType<IJobService, JobService>(); 
-            
+            container.RegisterType<IInfoMessagingService, InfoMessagingService>(new InjectionConstructor("defaultTitle", 
+                "defaultMessage", "defaultCssClass" ));
+
         }
     }
 }

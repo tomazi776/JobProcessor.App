@@ -6,7 +6,7 @@
 }
 
 <div class="slideable" style="display: none">
-    <h2 class="ml-2 mt-5 form-title" >Create Job</h2>
+    <h2 class="ml-2 mt-5 form-title">Create Job</h2>
     <div class="create-form">
         @using (Html.BeginForm())
         {
@@ -37,36 +37,17 @@
                 </div>
             </div>
         }
-
     </div>
 
     @section scripts
     {
-        @Scripts.Render("~/ bundles / jquery");
+        @Scripts.Render("~/bundles/jquery");
     }
-
-    @if (Model.JobCreated)
-    {
-        <div class="h2 text-success">
-            Job <span class="text-secondary">"@Model.PreviousNameSubmitted"</span> created successfully!
-        </div>
-    }
-    else if (Model.SubmitHit)
-    {
-        <div class="h2 text-danger">
-            Job <span class="text-secondary">"@Model.PreviousNameSubmitted"</span> not created!
-        </div>
-        <div class="p-0 text-danger">
-            There already exists job with that name. Pick unique one.
-        </div>
-    }
-
 </div>
 
 <div class="btn btn-sm btn-outline-info ml-3 mt-5">
     @Html.ActionLink("Back to List", "Index")
 </div>
-
 
 <script src="~/Scripts/jquery-3.4.1.js"></script>
 <script>

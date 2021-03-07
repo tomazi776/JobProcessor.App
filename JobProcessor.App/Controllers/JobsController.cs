@@ -1,4 +1,5 @@
-﻿using JobProcessor.App.ViewModels;
+﻿using JobProcessor.App.Services;
+using JobProcessor.App.ViewModels;
 using JobProcessor.DataAccess.Services;
 using JobProcessor.Domain.Models;
 using JobProcessor.Domain.Services;
@@ -10,21 +11,21 @@ namespace JobProcessor.App.Controllers
     public class JobsController : Controller
     {
         protected readonly IJobService jobService;
-        public JobsController(IJobService jobService)
+        protected readonly IInfoMessagingService messagingService;
+        public JobsController(IJobService jobService, IInfoMessagingService messagingService)
         {
             this.jobService = jobService;
+            this.messagingService = messagingService;
         }
 
         public ActionResult Index(Metadata metadata)
         {
-            var jobsVM = new JobsVM(jobService, metadata);
-            return View(jobsVM);
+            return View(new JobsVM(jobService, metadata));
         }
 
         public PartialViewResult GetAll(Metadata metadata)
         {
-            var jobsVm = new JobsVM(jobService, metadata);
-            return PartialView(jobsVm);
+            return PartialView(new JobsVM(jobService, metadata));
         }
 
         public ActionResult Create()
@@ -35,20 +36,22 @@ namespace JobProcessor.App.Controllers
         [HttpPost]
         public ActionResult Create(JobCreationVM job)
         {
-            EntityStateResult<Job> result = new EntityStateResult<Job>();
-            job.SubmitHit = true;
             if (ModelState.IsValid)
             {
-                result = jobService.Create(job.Name, job.DoAfter);
+                var result = jobService.Create(job.Name, job.DoAfter);
+                if (result.Success)
+                {
+                    TempData["jobCreated"] = messagingService
+                        .CreateMessage("Job created",$"Job {job.Name} succesfully created.", "text-success");
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    ModelState.AddModelError("",
+                        $"Cannot create Job \"{job.Name}\" \n There already exists job with that name. Pick unique one.");
+                }
             }
-
-            ModelState.Clear();
-            return View(new JobCreationVM()
-            {
-                PreviousNameSubmitted = job.Name,
-                SubmitHit = true,
-                JobCreated = result.Success
-            });
+            return View(job);
         }
     }
 }

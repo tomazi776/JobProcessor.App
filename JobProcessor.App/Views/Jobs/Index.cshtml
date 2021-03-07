@@ -1,5 +1,5 @@
-﻿@model JobProcessor.App.ViewModels.JobsVM
-@using JobProcessor.App.ViewModels;
+﻿@using JobProcessor.App.Services
+@model JobProcessor.App.ViewModels.JobsVM
 
 @{
     ViewBag.Title = "Index";
@@ -23,6 +23,14 @@
             </nav>
         </div>
     </row>
+    @if (TempData["jobCreated"] != null)
+    {
+        var message = (InfoMessagingService)TempData["jobCreated"];
+        <div id="jobCreationInfoMsg" style="display:none">
+            <h1>@message.Title</h1>
+            <span class="@message.CssClass">@message.Message</span>
+        </div>
+    }
 </div>
 
 <div id="jobsGrid">
@@ -30,6 +38,11 @@
 </div>
 
 <script src="~/Scripts/jquery-3.4.1.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#jobCreationInfoMsg").slideToggle(1000);
+    });
+</script>
 
 
 
