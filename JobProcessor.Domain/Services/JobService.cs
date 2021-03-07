@@ -30,20 +30,8 @@ namespace JobProcessor.Domain.Services
 
         public List<Job> Get(Metadata withMetadata)
         {
-            IEnumerable<DataAccess.Entities.Job> jobs;
-            IEnumerable<Job> mappedJobs;
-
-            if (withMetadata is null)
-            {
-                jobs = jobsRepository.Get();
-                mappedJobs = mappingService.MapManyDALToDomainModel(jobs);
-            }
-            else
-            {
-                jobs = jobsRepository.Get(withMetadata);
-                mappedJobs = mappingService.MapManyDALToDomainModel(jobs);
-            }
-            return mappedJobs.ToList();
+            var jobs = jobsRepository.Get(withMetadata);
+            return mappingService.MapManyDALToDomainModel(jobs).ToList();
         }
 
         public int GetFilteredCount(int startIndex = 0, int pageSize = 0)

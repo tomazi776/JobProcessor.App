@@ -29,7 +29,7 @@ namespace JobProcessor.DataAccess.JobsRepository
         public IEnumerable<Job> Get(Metadata withMetadata)
         {
             return (withMetadata is null) 
-                ? ctx.Jobs.ToList() 
+                ? ctx.Jobs.OrderBy(j => j.CreatedAt).ToList() 
                 : ctx.Jobs.OrderBy(j => j.CreatedAt).Skip(withMetadata.StartIndex).Take(withMetadata.PageSize).ToList();
         }
 
