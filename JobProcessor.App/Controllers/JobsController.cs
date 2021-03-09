@@ -20,6 +20,8 @@ namespace JobProcessor.App.Controllers
 
         public ActionResult Index(Metadata metadata)
         {
+            metadata.StartIndex = Page.GetDefault(Page.startIndex);
+            metadata.PageSize = Page.GetDefault(Page.pageSize);
             return View(new JobsVM(jobService, metadata));
         }
 

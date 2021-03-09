@@ -3,27 +3,19 @@ namespace JobProcessor.DataAccess.Services
 {
     public class Metadata : IPaginateable
     {
-
-        public Metadata()
+        public Metadata(int defaultstartIndex, int defaultPageSize)
         {
-            SetDefaultPaginationValues();
+            StartIndex = defaultstartIndex;
+            PageSize = defaultPageSize;
         }
+
+        public Metadata() { }
 
         private int startIndex;
         public int StartIndex
         {
             get { return startIndex; }
-            set
-            {
-                if ((value < 0))
-                {
-                    startIndex = 0;
-                }
-                else
-                {
-                    startIndex = value;
-                }
-            }
+            set => startIndex = (value < 0) ? 0 : value;
         }
 
         private int pageSize;
@@ -31,12 +23,6 @@ namespace JobProcessor.DataAccess.Services
         {
             get { return pageSize; }
             set => pageSize = (value < 0) ? 0 : value;
-        }
-
-        public void SetDefaultPaginationValues()
-        {
-            StartIndex = 0;
-            PageSize = 2;
         }
     }
 }

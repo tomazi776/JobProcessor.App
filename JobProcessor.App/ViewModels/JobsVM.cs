@@ -33,9 +33,9 @@ namespace JobProcessor.App.ViewModels
                     return (Current.Metadata.StartIndex > 0);
 
                 case Navigation.Next:
-                    var nextPageCount = jobService.GetFilteredCount(Current.Metadata.StartIndex, Current.Metadata.PageSize);
-                    return nextPageCount >= 1;
-
+                    var nextPageStartIndex = Current.Metadata.StartIndex + Current.Metadata.PageSize;
+                    var nextPageCount = jobService.GetFilteredCount(nextPageStartIndex, Current.Metadata.PageSize) >= 1;
+                    return nextPageCount;
             }
             return true;
         }
