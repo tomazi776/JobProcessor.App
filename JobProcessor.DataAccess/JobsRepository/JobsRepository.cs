@@ -1,6 +1,8 @@
 ﻿using JobProcessor.DataAccess.ContextConfig;
 using JobProcessor.DataAccess.Entities;
+using JobProcessor.DataAccess.Services;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 
@@ -23,5 +25,17 @@ namespace JobProcessor.DataAccess.JobsRepository
         }
 
         public bool Exist(Job job) => ctx.Jobs.Any(j => j.Name == job.Name);
+
+        public IEnumerable<Job> Get(Metadata withMetadata)
+        {
+            return (withMetadata is null) 
+                ? ctx.Jobs.OrderBy(j => j.CreatedAt).ToList() 
+                : ctx.Jobs.OrderBy(j => j.CreatedAt).Skip(withMetadata.StartIndex).Take(withMetadata.PageSize).ToList();
+        }
+
+        public int GetFilteredCount(int startIndex, int pageSize)
+        {
+            return ctx.Jobs.OrderBy(j => j.CreatedAt).Skip(startIndex).Take(pageSize).Count();
+        }
     }
 }

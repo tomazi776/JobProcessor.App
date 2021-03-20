@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace JobProcessor.App.ViewModels
 {
-    public class JobCreationViewModel
+    public class JobCreationVM
     {
         [Display(Name = "Unique Job name")]
         [RegularExpression(@".*\S+.*", ErrorMessage = "No white space allowed")]
@@ -15,9 +15,5 @@ namespace JobProcessor.App.ViewModels
         [DisplayFormat( ApplyFormatInEditMode = true, ConvertEmptyStringToNull = true, DataFormatString = "{0:dd-MM-yyyy}")]
         [Display(Name = "Do after (Optional)")]
         public DateTime? DoAfter { get; set; }
-        public bool JobCreated { get; set; }
-        public string PreviousNameSubmitted { get; set; } 
-        public bool SubmitHit { get; set; }
     }
-
 }

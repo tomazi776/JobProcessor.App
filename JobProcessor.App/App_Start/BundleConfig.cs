@@ -22,6 +22,9 @@ namespace JobProcessor.App
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/grids").Include("~/Scripts/getAllJobsGrid.js"));
+
+
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap-sketchy.css",
                       "~/Content/site.css"));

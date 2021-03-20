@@ -1,5 +1,6 @@
 ﻿
 using JobProcessor.Domain.Models;
+using System.Collections.Generic;
 
 namespace JobProcessor.Domain.Services
 {
@@ -8,5 +9,8 @@ namespace JobProcessor.Domain.Services
         DataAccess.Entities.Job MapDomainToDALModel(Job job);
 
         Job MapDALToDomainModel(DataAccess.Entities.Job job);
+
+        IEnumerable<Job> MapManyDALToDomainModel(IEnumerable<DataAccess.Entities.Job> job);
+
     }
 }
