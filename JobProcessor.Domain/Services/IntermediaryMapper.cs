@@ -7,10 +7,10 @@ namespace JobProcessor.Domain.Services
     public class IntermediaryMapper : IIntermediaryMappingService
     {
         public Models.Job MapDALToDomainModel(Job job) => 
-            new Models.Job(job.Id, job.Name, job.StatusFlag, job.DoAfter, job.CreatedAt, job.UpdatedAt, job.Counter);
-        
+            new Models.Job(job.Id, job.Name, job.StatusFlag, job.DoAfter, job.CreatedAt, job.UpdatedAt, job.ProcessedAt, job.Counter);
+
         public Job MapDomainToDALModel(Models.Job job) => 
-            new Job(job.Id, job.Name, job.Status, job.DoAfter, job.CreatedAt, job.UpdatedAt, job.Counter);
+            new Job(job.Id, job.Name, job.Status, job.DoAfter, job.CreatedAt, job.UpdatedAt, job.ProcessedAt, job.Counter);
 
         public IEnumerable<Models.Job> MapManyDALToDomainModel(IEnumerable<Job> jobs)
         {
