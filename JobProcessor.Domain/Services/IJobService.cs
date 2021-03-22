@@ -10,5 +10,6 @@ namespace JobProcessor.Domain.Services
         EntityStateResult<Job> Create(string name, DateTime? doAfter = null);
         List<Job> Get(Metadata withMetadata = null);
         int GetFilteredCount(int startIndex = 0, int pageSize = 0);
+        EntityStateResult<Job> GetById(Guid jobId);
     }
 }

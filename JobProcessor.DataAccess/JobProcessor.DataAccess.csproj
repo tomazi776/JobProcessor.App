@@ -79,6 +79,10 @@
     <Compile Include="Migrations\202102121348542_AddParametrizedConstructor.designer.cs">
       <DependentUpon>202102121348542_AddParametrizedConstructor.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202102202034284_Add_ProcessedAt_Date_To_Jobs_Table.cs" />
+    <Compile Include="Migrations\202102202034284_Add_ProcessedAt_Date_To_Jobs_Table.Designer.cs">
+      <DependentUpon>202102202034284_Add_ProcessedAt_Date_To_Jobs_Table.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\202102231939257_BranchSwitchedRollback.cs" />
     <Compile Include="Migrations\202102231939257_BranchSwitchedRollback.designer.cs">
       <DependentUpon>202102231939257_BranchSwitchedRollback.cs</DependentUpon>
@@ -116,6 +120,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202102121348542_AddParametrizedConstructor.resx">
       <DependentUpon>202102121348542_AddParametrizedConstructor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202102202034284_Add_ProcessedAt_Date_To_Jobs_Table.resx">
+      <DependentUpon>202102202034284_Add_ProcessedAt_Date_To_Jobs_Table.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202102231939257_BranchSwitchedRollback.resx">
       <DependentUpon>202102231939257_BranchSwitchedRollback.cs</DependentUpon>

@@ -11,5 +11,6 @@ namespace JobProcessor.DataAccess.JobsRepository
         Job Create(Job job);
         bool Exist(Job job);
         IEnumerable<Job> Get(Metadata withMetadata = null);
+        Job GetById(Guid Id);
     }
 }

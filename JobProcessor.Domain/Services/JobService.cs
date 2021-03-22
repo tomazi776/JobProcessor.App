@@ -21,7 +21,7 @@ namespace JobProcessor.Domain.Services
 
         public EntityStateResult<Job> Create(string name, DateTime? doAfter)
         {
-            var domainJob = new Job(Guid.NewGuid(), name, JobStatus.New, doAfter, DateTime.Now, DateTime.Now);
+            var domainJob = new Job(Guid.NewGuid(), name, JobStatus.New, doAfter, DateTime.Now, DateTime.Now, null);
             var job = mappingService.MapDomainToDALModel(domainJob);
             return (jobsRepository.Exist(job))
                 ? new EntityStateResult<Job>() { ErrorMsg = "There already exists job with that name. Pick unique one.", Data = null }
@@ -37,6 +37,12 @@ namespace JobProcessor.Domain.Services
         public int GetFilteredCount(int startIndex = 0, int pageSize = 0)
         {
             return jobsRepository.GetFilteredCount(startIndex, pageSize);
+        }
+
+        public EntityStateResult<Job> GetById(Guid jobId)
+        {
+            var job = jobsRepository.GetById(jobId);
+            return new EntityStateResult<Job>() { Data = mappingService.MapDALToDomainModel(job) };
         }
     }
 }

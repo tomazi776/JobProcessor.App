@@ -5,7 +5,11 @@ namespace JobProcessor.Domain.Models
 {
     public class Job
     {
-        public Job(Guid id, string name, JobStatus status, DateTime? doAfter, DateTime createdAt, DateTime? updatedAt, int counter = 0)
+        public Job()
+        {
+
+        }
+        public Job(Guid id, string name, JobStatus status, DateTime? doAfter, DateTime createdAt, DateTime? updatedAt, DateTime? processedAt, int counter = 0)
         {
             Id = id;
             Name = name;
@@ -14,6 +18,8 @@ namespace JobProcessor.Domain.Models
             DoAfter = doAfter;
             CreatedAt = createdAt;
             UpdatedAt = updatedAt;
+            ProcessedAt = processedAt;
+
         }
 
         public Guid Id { get; private set; }
@@ -23,5 +29,7 @@ namespace JobProcessor.Domain.Models
         public DateTime? DoAfter { get; private set; }
         public DateTime CreatedAt { get; private set; }
         public DateTime? UpdatedAt { get; private set; }
+        public DateTime? ProcessedAt { get; private set; }
+
     }
 }
