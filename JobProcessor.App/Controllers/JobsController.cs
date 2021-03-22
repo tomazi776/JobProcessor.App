@@ -57,9 +57,9 @@ namespace JobProcessor.App.Controllers
         }
         
         [HttpGet]
-        public ActionResult Details(Job job)
+        public ActionResult Details(Guid id)
         {
-            var detailedJob = jobService.GetById(job.Id);
+            var detailedJob = jobService.GetById(id);
             var detailsVm = new JobDetailsVM(detailedJob.Data);
             return View(detailsVm);
         }
